@@ -306,7 +306,7 @@ export function botMessage(
   }
 
   if (messageType === "sayHello") {
-    switch (content) {
+    switch (message) {
       case `${messagePrefix} bot`:
       case `${messagePrefix} bot.`:
       case `${messagePrefix} bot!`:
