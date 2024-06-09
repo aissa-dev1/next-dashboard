@@ -17,47 +17,46 @@ import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer } from "react-toastify";
 
 const WelcomePage = () => {
-    const state = useSelector<AppState, AppState>((state) => state);
-    const dispatch = useDispatch();
+  const state = useSelector<AppState, AppState>((state) => state);
+  const dispatch = useDispatch();
 
-    useEffect(() => {
-        themeSwitcher(state.theme);
-    }, []);
+  useEffect(() => {
+    themeSwitcher(state.theme);
+  }, [state.theme]);
 
-    useEffect(() => {
-        themeSwitcher(state.theme);
-    }, [state.theme]);
+  return (
+    <>
+      <Header title="Aissa | Dashboard - Welcome" />
 
-    return (
-        <>
-            <Header title="Aissa | Dashboard - Welcome" />
+      <Base>
+        <SearchBar />
 
-            <Base>
-                <SearchBar />
+        <Logo content="welcome" />
 
-                <Logo content="welcome" />
+        <BaseWrapper>
+          <Move
+            href="/"
+            onClick={() => dispatch(changeLinkAction("dashboard"))}
+          >
+            Go back
+          </Move>
 
-                <BaseWrapper>
-                    <Move href="/" onClick={() => dispatch(changeLinkAction("dashboard"))}>
-                        Go back
-                    </Move>
+          <Flex className="!col-span-3 gap-4" direction="col">
+            <Welcome dontIncludeShowMoreLink />
 
-                    <Flex className="!col-span-3 gap-4" direction="col">
-                        <Welcome dontIncludeShowMoreLink />
+            <Grid className="gap-4 xl:grid-cols-2" cols="1">
+              <GeneralInfo />
+              <UserInfo />
+            </Grid>
+          </Flex>
+        </BaseWrapper>
 
-                        <Grid className="gap-4 xl:grid-cols-2" cols="1">
-                            <GeneralInfo />
-                            <UserInfo />
-                        </Grid>
-                    </Flex>
-                </BaseWrapper>
-
-                {state.switchBooleans.websiteControl.isNotificationActive && (
-                    <ToastContainer position="top-center" theme={state.theme} />
-                )}
-            </Base>
-        </>
-    );
+        {state.switchBooleans.websiteControl.isNotificationActive && (
+          <ToastContainer position="top-center" theme={state.theme} />
+        )}
+      </Base>
+    </>
+  );
 };
 
 export default WelcomePage;

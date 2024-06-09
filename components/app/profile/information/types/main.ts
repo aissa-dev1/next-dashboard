@@ -1,13 +1,11 @@
-import { AppStateActionType } from "@/redux/types/app";
-
 export interface InfoBoxProps {
-    title: string;
-    isChecked: boolean;
-    dispatchType: AppStateActionType;
-    children?: React.ReactNode;
+  title: string;
+  isChecked: boolean;
+  dispatchType: any;
+  children?: React.ReactNode;
 }
 
 export interface InfoBoxItemProps {
-    prop: string;
-    value: string | number;
+  prop: string;
+  value: string | number;
 }

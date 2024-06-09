@@ -11,35 +11,31 @@ import { useSelector } from "react-redux";
 import { ToastContainer } from "react-toastify";
 
 const Friends = () => {
-    const state = useSelector<AppState, AppState>((state) => state);
+  const state = useSelector<AppState, AppState>((state) => state);
 
-    useEffect(() => {
-        themeSwitcher(state.theme);
-    }, []);
+  useEffect(() => {
+    themeSwitcher(state.theme);
+  }, [state.theme]);
 
-    useEffect(() => {
-        themeSwitcher(state.theme);
-    }, [state.theme]);
+  return (
+    <>
+      <Header title="Aissa | Friends" />
 
-    return (
-        <>
-            <Header title="Aissa | Friends" />
+      <Base>
+        <SearchBar />
 
-            <Base>
-                <SearchBar />
+        <Logo content="friends" />
 
-                <Logo content="friends" />
+        <BaseWrapper>
+          <FriendsInfo />
+        </BaseWrapper>
 
-                <BaseWrapper>
-                    <FriendsInfo />
-                </BaseWrapper>
-
-                {state.switchBooleans.websiteControl.isNotificationActive && (
-                    <ToastContainer position="top-center" theme={state.theme} />
-                )}
-            </Base>
-        </>
-    );
+        {state.switchBooleans.websiteControl.isNotificationActive && (
+          <ToastContainer position="top-center" theme={state.theme} />
+        )}
+      </Base>
+    </>
+  );
 };
 
 export default Friends;

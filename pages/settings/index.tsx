@@ -17,45 +17,41 @@ import { useSelector } from "react-redux";
 import { ToastContainer } from "react-toastify";
 
 const Settings = () => {
-    const state = useSelector<AppState, AppState>((state) => state);
+  const state = useSelector<AppState, AppState>((state) => state);
 
-    useEffect(() => {
-        themeSwitcher(state.theme);
-    }, []);
+  useEffect(() => {
+    themeSwitcher(state.theme);
+  }, [state.theme]);
 
-    useEffect(() => {
-        themeSwitcher(state.theme);
-    }, [state.theme]);
+  return (
+    <>
+      <Header title="Aissa | Settings" />
 
-    return (
-        <>
-            <Header title="Aissa | Settings" />
+      <Base>
+        <SearchBar />
 
-            <Base>
-                <SearchBar />
+        <Logo content="settings" />
 
-                <Logo content="settings" />
+        <BaseWrapper>
+          <Flex className="!col-span-3 gap-4" direction="col">
+            <SiteControl />
 
-                <BaseWrapper>
-                    <Flex className="!col-span-3 gap-4" direction="col">
-                        <SiteControl />
+            <Grid className="gap-4 xl:grid-cols-2 2xl:grid-cols-3" cols="1">
+              <GeneralInfo />
+              <SkillsControl />
+              <AppearanceControl />
+            </Grid>
 
-                        <Grid className="gap-4 xl:grid-cols-2 2xl:grid-cols-3" cols="1">
-                            <GeneralInfo />
-                            <SkillsControl />
-                            <AppearanceControl />
-                        </Grid>
+            <ComponentsShapesControl />
+          </Flex>
+        </BaseWrapper>
 
-                        <ComponentsShapesControl />
-                    </Flex>
-                </BaseWrapper>
-
-                {state.switchBooleans.websiteControl.isNotificationActive && (
-                    <ToastContainer position="top-center" theme={state.theme} />
-                )}
-            </Base>
-        </>
-    );
+        {state.switchBooleans.websiteControl.isNotificationActive && (
+          <ToastContainer position="top-center" theme={state.theme} />
+        )}
+      </Base>
+    </>
+  );
 };
 
 export default Settings;

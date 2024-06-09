@@ -11,35 +11,31 @@ import { useSelector } from "react-redux";
 import { ToastContainer } from "react-toastify";
 
 const Plans = () => {
-    const state = useSelector<AppState, AppState>((state) => state);
+  const state = useSelector<AppState, AppState>((state) => state);
 
-    useEffect(() => {
-        themeSwitcher(state.theme);
-    }, []);
+  useEffect(() => {
+    themeSwitcher(state.theme);
+  }, [state.theme]);
 
-    useEffect(() => {
-        themeSwitcher(state.theme);
-    }, [state.theme]);
+  return (
+    <>
+      <Header title="Aissa | Plans" />
 
-    return (
-        <>
-            <Header title="Aissa | Plans" />
+      <Base>
+        <SearchBar />
 
-            <Base>
-                <SearchBar />
+        <Logo content="plans" />
 
-                <Logo content="plans" />
+        <BaseWrapper>
+          <PlansInfo />
+        </BaseWrapper>
 
-                <BaseWrapper>
-                    <PlansInfo />
-                </BaseWrapper>
-
-                {state.switchBooleans.websiteControl.isNotificationActive && (
-                    <ToastContainer position="top-center" theme={state.theme} />
-                )}
-            </Base>
-        </>
-    );
+        {state.switchBooleans.websiteControl.isNotificationActive && (
+          <ToastContainer position="top-center" theme={state.theme} />
+        )}
+      </Base>
+    </>
+  );
 };
 
 export default Plans;

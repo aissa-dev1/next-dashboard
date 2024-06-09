@@ -13,41 +13,37 @@ import { useSelector } from "react-redux";
 import { ToastContainer } from "react-toastify";
 
 const ChatBot = () => {
-    const state = useSelector<AppState, AppState>((state) => state);
+  const state = useSelector<AppState, AppState>((state) => state);
 
-    useEffect(() => {
-        themeSwitcher(state.theme);
-    }, []);
+  useEffect(() => {
+    themeSwitcher(state.theme);
+  }, [state.theme]);
 
-    useEffect(() => {
-        themeSwitcher(state.theme);
-    }, [state.theme]);
+  return (
+    <>
+      <Header title="Aissa | Chat Bot" />
 
-    return (
-        <>
-            <Header title="Aissa | Chat Bot" />
+      <Base>
+        <SearchBar />
 
-            <Base>
-                <SearchBar />
+        <Logo content="Chat bot [Alpha]" />
 
-                <Logo content="Chat bot [Alpha]" />
+        <BaseWrapper>
+          {state.switchBooleans.subscribeControl.isChatBotEnabled ? (
+            <ChatBotMessages />
+          ) : (
+            <BoxContainer className="col-span-3">
+              <Subscribe subscribeType="max" feature="Chat Bot" />
+            </BoxContainer>
+          )}
+        </BaseWrapper>
 
-                <BaseWrapper>
-                    {state.switchBooleans.subscribeControl.isChatBotEnabled ? (
-                        <ChatBotMessages />
-                    ) : (
-                        <BoxContainer className="col-span-3">
-                            <Subscribe subscribeType="max" feature="Chat Bot" />
-                        </BoxContainer>
-                    )}
-                </BaseWrapper>
-
-                {state.switchBooleans.websiteControl.isNotificationActive && (
-                    <ToastContainer position="top-center" theme={state.theme} />
-                )}
-            </Base>
-        </>
-    );
+        {state.switchBooleans.websiteControl.isNotificationActive && (
+          <ToastContainer position="top-center" theme={state.theme} />
+        )}
+      </Base>
+    </>
+  );
 };
 
 export default ChatBot;

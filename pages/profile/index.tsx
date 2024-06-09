@@ -15,42 +15,38 @@ import { useSelector } from "react-redux";
 import { ToastContainer } from "react-toastify";
 
 const Profile = () => {
-    const state = useSelector<AppState, AppState>((state) => state);
+  const state = useSelector<AppState, AppState>((state) => state);
 
-    useEffect(() => {
-        themeSwitcher(state.theme);
-    }, []);
+  useEffect(() => {
+    themeSwitcher(state.theme);
+  }, [state.theme]);
 
-    useEffect(() => {
-        themeSwitcher(state.theme);
-    }, [state.theme]);
+  return (
+    <>
+      <Header title="Aissa | Profile" />
 
-    return (
-        <>
-            <Header title="Aissa | Profile" />
+      <Base>
+        <SearchBar />
 
-            <Base>
-                <SearchBar />
+        <Logo content="Profile" />
 
-                <Logo content="Profile" />
+        <BaseWrapper>
+          <Flex className="!col-span-3 gap-4" direction="col">
+            <Information />
 
-                <BaseWrapper>
-                    <Flex className="!col-span-3 gap-4" direction="col">
-                        <Information />
+            <Grid className="gap-4 xl:grid-cols-2" cols="1">
+              <GeneralInfo />
+              <ProfileControl />
+            </Grid>
+          </Flex>
+        </BaseWrapper>
 
-                        <Grid className="gap-4 xl:grid-cols-2" cols="1">
-                            <GeneralInfo />
-                            <ProfileControl />
-                        </Grid>
-                    </Flex>
-                </BaseWrapper>
-
-                {state.switchBooleans.websiteControl.isNotificationActive && (
-                    <ToastContainer position="top-center" theme={state.theme} />
-                )}
-            </Base>
-        </>
-    );
+        {state.switchBooleans.websiteControl.isNotificationActive && (
+          <ToastContainer position="top-center" theme={state.theme} />
+        )}
+      </Base>
+    </>
+  );
 };
 
 export default Profile;

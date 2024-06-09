@@ -13,40 +13,39 @@ import changeLinkAction from "@/redux/actions/change_actions/changeLinkAction";
 import { ToastContainer } from "react-toastify";
 
 const ProjectsPage = () => {
-    const state = useSelector<AppState, AppState>((state) => state);
-    const dispatch = useDispatch();
+  const state = useSelector<AppState, AppState>((state) => state);
+  const dispatch = useDispatch();
 
-    useEffect(() => {
-        themeSwitcher(state.theme);
-    }, []);
+  useEffect(() => {
+    themeSwitcher(state.theme);
+  }, [state.theme]);
 
-    useEffect(() => {
-        themeSwitcher(state.theme);
-    }, [state.theme]);
+  return (
+    <>
+      <Header title="Aissa | Dashboard - Projects" />
 
-    return (
-        <>
-            <Header title="Aissa | Dashboard - Projects" />
+      <Base>
+        <SearchBar />
 
-            <Base>
-                <SearchBar />
+        <Logo content="projects" />
 
-                <Logo content="projects" />
+        <BaseWrapper>
+          <Move
+            href="/"
+            onClick={() => dispatch(changeLinkAction("dashboard"))}
+          >
+            Go back
+          </Move>
 
-                <BaseWrapper>
-                    <Move href="/" onClick={() => dispatch(changeLinkAction("dashboard"))}>
-                        Go back
-                    </Move>
+          <ProjectsInfoPage />
+        </BaseWrapper>
 
-                    <ProjectsInfoPage />
-                </BaseWrapper>
-
-                {state.switchBooleans.websiteControl.isNotificationActive && (
-                    <ToastContainer position="top-center" theme={state.theme} />
-                )}
-            </Base>
-        </>
-    );
+        {state.switchBooleans.websiteControl.isNotificationActive && (
+          <ToastContainer position="top-center" theme={state.theme} />
+        )}
+      </Base>
+    </>
+  );
 };
 
 export default ProjectsPage;

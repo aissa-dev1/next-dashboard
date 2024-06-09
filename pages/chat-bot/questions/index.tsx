@@ -15,52 +15,57 @@ import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer } from "react-toastify";
 
 const Questions = () => {
-    const state = useSelector<AppState, AppState>((state) => state);
-    const dispatch = useDispatch();
+  const state = useSelector<AppState, AppState>((state) => state);
+  const dispatch = useDispatch();
 
-    useEffect(() => {
-        themeSwitcher(state.theme);
-    }, []);
+  useEffect(() => {
+    themeSwitcher(state.theme);
+  }, [state.theme]);
 
-    useEffect(() => {
-        themeSwitcher(state.theme);
-    }, [state.theme]);
+  return (
+    <>
+      <Header title="Aissa | Chat Bot - Questions" />
 
-    return (
-        <>
-            <Header title="Aissa | Chat Bot - Questions" />
+      <Base>
+        <SearchBar />
 
-            <Base>
-                <SearchBar />
+        <Logo content="Questions" />
 
-                <Logo content="Questions" />
+        <BaseWrapper>
+          <BoxContainer className="col-span-3">
+            <Details note="Links">
+              <Flex className="px-4 py-2 gap-2" direction="col">
+                <Move
+                  href="/chat-bot"
+                  onClick={() => dispatch(changeLinkAction("chat-bot"))}
+                >
+                  Go Back
+                </Move>
 
-                <BaseWrapper>
-                    <BoxContainer className="col-span-3">
-                        <Details note="Links">
-                            <Flex className="px-4 py-2 gap-2" direction="col">
-                                <Move href="/chat-bot" onClick={() => dispatch(changeLinkAction("chat-bot"))}>
-                                    Go Back
-                                </Move>
+                <Move
+                  href="/chat-bot/actions"
+                  onClick={() => dispatch(changeLinkAction("chat-bot"))}
+                >
+                  Actions
+                </Move>
 
-                                <Move href="/chat-bot/actions" onClick={() => dispatch(changeLinkAction("chat-bot"))}>
-                                    Actions
-                                </Move>
+                <Move
+                  href="/chat-bot/sayhello"
+                  onClick={() => dispatch(changeLinkAction("chat-bot"))}
+                >
+                  SayHello
+                </Move>
+              </Flex>
+            </Details>
+          </BoxContainer>
+        </BaseWrapper>
 
-                                <Move href="/chat-bot/sayhello" onClick={() => dispatch(changeLinkAction("chat-bot"))}>
-                                    SayHello
-                                </Move>
-                            </Flex>
-                        </Details>
-                    </BoxContainer>
-                </BaseWrapper>
-
-                {state.switchBooleans.websiteControl.isNotificationActive && (
-                    <ToastContainer position="top-center" theme={state.theme} />
-                )}
-            </Base>
-        </>
-    );
+        {state.switchBooleans.websiteControl.isNotificationActive && (
+          <ToastContainer position="top-center" theme={state.theme} />
+        )}
+      </Base>
+    </>
+  );
 };
 
 export default Questions;

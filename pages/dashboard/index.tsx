@@ -22,50 +22,59 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { ToastContainer } from "react-toastify";
 
-const LatestTasks = dynamic(() => import("@/components/app/dashboard/latest_tasks/LatestTasks"), { ssr: false });
+const LatestTasks = dynamic(
+  () => import("@/components/app/dashboard/latest_tasks/LatestTasks"),
+  { ssr: false }
+);
 
 const Home = () => {
-    const state = useSelector<AppState, AppState>((state) => state);
+  const state = useSelector<AppState, AppState>((state) => state);
 
-    useEffect(() => {
-        themeSwitcher(state.theme);
-    }, []);
+  useEffect(() => {
+    themeSwitcher(state.theme);
+  }, [state.theme]);
 
-    useEffect(() => {
-        themeSwitcher(state.theme);
-    }, [state.theme]);
+  return (
+    <>
+      <Header title="Aissa | Dashboard" />
 
-    return (
-        <>
-            <Header title="Aissa | Dashboard" />
+      <Base>
+        <SearchBar />
 
-            <Base>
-                <SearchBar />
+        <Logo content="dashboard" />
 
-                <Logo content="dashboard" />
+        <BaseWrapper>
+          <Welcome />
+          {!state.switchBooleans.widgetsControl.isQuickDraftActive && (
+            <QuickDraft />
+          )}
+          {!state.switchBooleans.widgetsControl.isYearlyTargetsActive && (
+            <YearlyTargets />
+          )}
+          {!state.switchBooleans.widgetsControl.isTicketsStatisticsActive && (
+            <TicketsStatistics />
+          )}
+          {!state.switchBooleans.widgetsControl.isLatestNewsActive && (
+            <LatestNews />
+          )}
+          <LatestTasks />
+          <TopSearchItems />
+          <LatestUploads />
+          {!state.switchBooleans.widgetsControl.isLastProjectProgressActive && (
+            <LastProjectProgress />
+          )}
+          <Reminders />
+          <LatestPost />
+          <SocialMediaStats />
+          <Projects />
+        </BaseWrapper>
 
-                <BaseWrapper>
-                    <Welcome />
-                    {!state.switchBooleans.widgetsControl.isQuickDraftActive && <QuickDraft />}
-                    {!state.switchBooleans.widgetsControl.isYearlyTargetsActive && <YearlyTargets />}
-                    {!state.switchBooleans.widgetsControl.isTicketsStatisticsActive && <TicketsStatistics />}
-                    {!state.switchBooleans.widgetsControl.isLatestNewsActive && <LatestNews />}
-                    <LatestTasks />
-                    <TopSearchItems />
-                    <LatestUploads />
-                    {!state.switchBooleans.widgetsControl.isLastProjectProgressActive && <LastProjectProgress />}
-                    <Reminders />
-                    <LatestPost />
-                    <SocialMediaStats />
-                    <Projects />
-                </BaseWrapper>
-
-                {state.switchBooleans.websiteControl.isNotificationActive && (
-                    <ToastContainer position="top-center" theme={state.theme} />
-                )}
-            </Base>
-        </>
-    );
+        {state.switchBooleans.websiteControl.isNotificationActive && (
+          <ToastContainer position="top-center" theme={state.theme} />
+        )}
+      </Base>
+    </>
+  );
 };
 
 export default Home;
